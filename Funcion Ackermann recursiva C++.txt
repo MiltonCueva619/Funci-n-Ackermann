@@ -1,0 +1,38 @@
+#include<iostream>
+using namespace std;
+
+//Definimos la funcion de Ackermann que recibe dos numeros como parametors que son m y n
+int Ackermann (int m , int n ){                         // Ackerman usando Recursividad
+//Esta es la primera condicion que nos dice la definicion, si m = 0 entonces el resultado sera n + 1 que sera lo que retornara si se cumple la condición.
+    if(m==0){
+        return n = n + 1;                               //Si m=0 -- A(m,n) = n+1
+    }
+//Esta es la segunda condición, la definicion dice que si m es mayor que 0 y n es igual a 0, entonces el resultado sera el Ackermann de m-1 y 1
+//es decir A(m-1,1).    
+    else if (m > 0 && n == 0 ){
+        return Ackermann (m-1 , 1);                     //Si m dif 0 y n=0 -- A(m,n)=A(m-1, 1)
+    }
+//La tercera condición se da cuando m y n son diferentes a 0, entonces la funcion devuelve Ackermann(m-1,Ackermann(m,n-1)), en el caso de llegar a esta condición
+//se ejecutara el Ackermann de dentro de la funcion hasta que pueda devolver un número natural.  
+    else if (m > 0 && n > 0){
+        return Ackermann(m-1, Ackermann(m, n-1));        //Si m dif 0 y n dif 0 -- A(m,n)= A(m-1, A(m,n-1))
+            m = m - 1;
+    }
+}
+
+int main(){
+//Definimos las variables
+	int num1,num2,num3;
+//Mostramos el mensaje en la pantalla para que el usuario sea el que asigne los valores que desee a m y n.
+	cout<<"Ingrese m: ";
+	cin>>num1;
+	cout<<"Ingrese n: ";
+	cin>>num2;
+//Invocamos a la funcion Ackermann y en los parametros los valores que escribio el usuario.
+	num3=Ackermann(num1,num2);
+//Mostramos el resultado
+	cout<<"El resultado es: " << num3 ; 
+}
+
+
+
