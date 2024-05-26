@@ -1,0 +1,101 @@
+#include <iostream> 
+
+#include <stack> 
+
+ 
+
+// Definimos la función de Ackermann iterativa 
+
+int ackermann(int m, int n) { 
+
+    // Usamos una pila para simular la recursión 
+
+    std::stack<std::pair<int, int>> pila; 
+
+    // Empujamos el primer par (m, n) a la pila 
+
+    pila.push({m, n}); 
+
+ 
+
+    // Mientras la pila no esté vacía, seguimos procesando 
+
+    while (!pila.empty()) { 
+
+        // Obtenemos el par (m,n) de la cima de la pila 
+
+        auto topElement = pila.top(); 
+
+        pila.pop(); // Sacamos el par de la pila 
+
+        m = topElement.first; 
+
+        n = topElement.second; 
+
+ 
+
+        // Caso base: si m es igual a 0, retornamos n + 1 
+
+        if (m == 0) { 
+
+            // Si la pila no está vacía, actualizamos el par de la cima 
+
+            if (!pila.empty()) { 
+
+                auto& topRef = pila.top(); 
+
+                topRef.second = n + 1; // Actualizamos el valor de n en la cima de la pila 
+
+            } else { 
+
+                return n + 1; // Si la pila está vacía, retornamos el resultado final 
+
+            } 
+
+        // El segundo caso: cuando m es diferente de 0 y n es igual a 0, retornamos A(m-1, 1)     
+
+        } else if (n == 0) {  
+
+            pila.push({m - 1, 1}); // Empujamos el nuevo par (m-1, 1) a la pila 
+
+        } else { // La última condición: cuando m y n son diferentes de 0, devuelve A(m-1, A(m, n-1)) 
+
+            pila.push({m - 1, 0}); // Empujamos primero el par (m-1, 0) 
+
+            pila.push({m, n - 1}); // Luego empujamos el par (m, n-1) que se resolverá primero 
+
+        } 
+
+    } 
+
+    return n; // Este retorno es redundante, pero necesario para la estructura del código 
+
+} 
+
+ 
+
+int main() { 
+
+    // Definimos las variables 
+
+    int m, n, r; 
+
+    // En pantalla imprimimos el mensaje para que el usuario ingrese los valores y se asignan a las variables 
+
+    std::cout << "Ingrese el valor de m: "; 
+
+    std::cin >> m; 
+
+    std::cout << "Ingrese el valor de n: "; 
+
+    std::cin >> n; 
+
+ 
+
+    // Calcular la función de Ackermann con los valores ingresados 
+
+    r = ackermann(m, n); 
+
+    std::cout << "Ackermann(" << m << ", " << n << ") = " << r << std::endl; 
+
+} 

@@ -1,0 +1,31 @@
+
+def ackermann(m, n):
+    # Inicializamos una pila con un solo elemento que contiene los valores de m y n.
+    stack = [(m, n)]
+
+    while stack:
+        # Desapilamos un par de (m, n).
+        m, n = stack.pop()
+
+        # Caso base 1: Si m = 0, establecemos el resultado n + 1.
+        if m == 0:
+            result = n + 1
+        # Caso base 2: Si n = 0, apilamos (m - 1, 1).
+        elif n == 0:
+            stack.append((m - 1, 1))
+            continue
+        # Caso general: Apilamos los pares (m - 1, n) y (m, n - 1).
+        else:
+            stack.append((m - 1, n))
+            stack.append((m, n - 1))
+            continue
+
+        # Imprimimos el resultado.
+        print(f"A({m}, {n}) = {result}")
+
+# Pedimos al usuario ingresar los valores de (m, n).
+m = int(input("Ingrese el va0lor de m: "))
+n = int(input("Ingrese el valor de n: "))
+
+# Calculamos y mostramos el resultado de la función.
+ackermann(m, n)

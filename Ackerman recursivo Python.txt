@@ -1,0 +1,18 @@
+# Definición de la función de Ackermann
+def ackermann(m,n):
+    # Caso base: m = 0, devuelve n + 1
+    if m == 0:
+        return n + 1
+    # Caso recursivo: m > 0 y n = 0, llamada recursiva con m - 1 y 1
+    elif n == 0:
+        return ackermann(m - 1, 1)
+    # Caso recursivo general: m > 0 y n > 0, llamada recursiva anidada
+    else:
+        return ackermann(m - 1, ackermann(m, n - 1))
+
+# Pide al usuario que ingrese valores para m y n
+m = int(input("Primer argumento para la función Ackermann (m): "))
+n = int(input("Segundo argumento para la función Ackermann (n): "))
+
+# Calcula y muestra el resultado de la función de Ackermann
+print(f"Ackermann({m},{n}) = {ackermann(m, n)}")
